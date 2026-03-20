@@ -1,0 +1,325 @@
+{
+  "countries": {
+    "US_PASSPORT": {
+      "name": "US Passport",
+      "country": "United States",
+      "dimensions": {
+        "width_px": 600,
+        "height_px": 600,
+        "width_mm": 51,
+        "height_mm": 51,
+        "dpi": 300
+      },
+      "background": {
+        "color": "#FFFFFF",
+        "name": "White"
+      },
+      "face_requirements": {
+        "head_height_percent": 0.69,
+        "eye_level_percent": 0.62,
+        "min_head_height_mm": 25,
+        "max_head_height_mm": 35
+      },
+      "file_requirements": {
+        "max_size_kb": 240,
+        "formats": ["JPEG", "PNG"],
+        "color_mode": "RGB"
+      },
+      "rules": [
+        "Neutral expression, mouth closed",
+        "Eyes open and clearly visible",
+        "No glasses",
+        "Face centered, looking straight ahead",
+        "Plain white background"
+      ]
+    },
+    "US_VISA": {
+      "name": "US Visa",
+      "country": "United States",
+      "dimensions": {
+        "width_px": 600,
+        "height_px": 600,
+        "width_mm": 51,
+        "height_mm": 51,
+        "dpi": 300
+      },
+      "background": {
+        "color": "#FFFFFF",
+        "name": "White"
+      },
+      "face_requirements": {
+        "head_height_percent": 0.69,
+        "eye_level_percent": 0.60,
+        "min_head_height_mm": 25,
+        "max_head_height_mm": 35
+      },
+      "file_requirements": {
+        "max_size_kb": 240,
+        "formats": ["JPEG"],
+        "color_mode": "RGB"
+      },
+      "rules": [
+        "Neutral expression",
+        "Glasses allowed if no glare",
+        "White background required",
+        "Face must cover 50-69% of frame"
+      ]
+    },
+    "EU_PASSPORT": {
+      "name": "EU / Schengen Passport",
+      "country": "European Union",
+      "dimensions": {
+        "width_px": 413,
+        "height_px": 531,
+        "width_mm": 35,
+        "height_mm": 45,
+        "dpi": 300
+      },
+      "background": {
+        "color": "#E8E8E8",
+        "name": "Light Gray"
+      },
+      "face_requirements": {
+        "head_height_percent": 0.75,
+        "eye_level_percent": 0.65,
+        "min_head_height_mm": 32,
+        "max_head_height_mm": 36
+      },
+      "file_requirements": {
+        "max_size_kb": 500,
+        "formats": ["JPEG", "PNG"],
+        "color_mode": "RGB"
+      },
+      "rules": [
+        "Neutral expression, mouth closed",
+        "Eyes clearly visible, no glare",
+        "Light gray or white background",
+        "Head must cover 70-80% of frame height"
+      ]
+    },
+    "UK_PASSPORT": {
+      "name": "UK Passport",
+      "country": "United Kingdom",
+      "dimensions": {
+        "width_px": 413,
+        "height_px": 531,
+        "width_mm": 35,
+        "height_mm": 45,
+        "dpi": 300
+      },
+      "background": {
+        "color": "#F0F0F0",
+        "name": "Plain Light"
+      },
+      "face_requirements": {
+        "head_height_percent": 0.75,
+        "eye_level_percent": 0.65,
+        "min_head_height_mm": 29,
+        "max_head_height_mm": 34
+      },
+      "file_requirements": {
+        "max_size_kb": 500,
+        "formats": ["JPEG"],
+        "color_mode": "RGB"
+      },
+      "rules": [
+        "Neutral expression, no smile",
+        "Eyes open, no hair covering face",
+        "Plain light background",
+        "No glasses"
+      ]
+    },
+    "CANADA_PASSPORT": {
+      "name": "Canadian Passport",
+      "country": "Canada",
+      "dimensions": {
+        "width_px": 420,
+        "height_px": 540,
+        "width_mm": 35,
+        "height_mm": 45,
+        "dpi": 300
+      },
+      "background": {
+        "color": "#FFFFFF",
+        "name": "White"
+      },
+      "face_requirements": {
+        "head_height_percent": 0.71,
+        "eye_level_percent": 0.62,
+        "min_head_height_mm": 31,
+        "max_head_height_mm": 36
+      },
+      "file_requirements": {
+        "max_size_kb": 240,
+        "formats": ["JPEG"],
+        "color_mode": "RGB"
+      },
+      "rules": [
+        "Neutral expression",
+        "Eyes visible and open",
+        "White background",
+        "Face must fill 31-36mm of 45mm height"
+      ]
+    },
+    "AUSTRALIA_PASSPORT": {
+      "name": "Australian Passport",
+      "country": "Australia",
+      "dimensions": {
+        "width_px": 413,
+        "height_px": 531,
+        "width_mm": 35,
+        "height_mm": 45,
+        "dpi": 300
+      },
+      "background": {
+        "color": "#FFFFFF",
+        "name": "White"
+      },
+      "face_requirements": {
+        "head_height_percent": 0.75,
+        "eye_level_percent": 0.65,
+        "min_head_height_mm": 32,
+        "max_head_height_mm": 36
+      },
+      "file_requirements": {
+        "max_size_kb": 500,
+        "formats": ["JPEG", "PNG"],
+        "color_mode": "RGB"
+      },
+      "rules": [
+        "Neutral expression",
+        "No glasses",
+        "Plain light background",
+        "Both eyes clearly visible"
+      ]
+    },
+    "INDIA_PASSPORT": {
+      "name": "Indian Passport",
+      "country": "India",
+      "dimensions": {
+        "width_px": 413,
+        "height_px": 531,
+        "width_mm": 35,
+        "height_mm": 45,
+        "dpi": 300
+      },
+      "background": {
+        "color": "#FFFFFF",
+        "name": "White"
+      },
+      "face_requirements": {
+        "head_height_percent": 0.75,
+        "eye_level_percent": 0.65,
+        "min_head_height_mm": 25,
+        "max_head_height_mm": 35
+      },
+      "file_requirements": {
+        "max_size_kb": 300,
+        "formats": ["JPEG"],
+        "color_mode": "RGB"
+      },
+      "rules": [
+        "Neutral expression",
+        "Face must cover 80% of frame",
+        "White background",
+        "Eyes open and looking at camera"
+      ]
+    },
+    "CHINA_VISA": {
+      "name": "Chinese Visa",
+      "country": "China",
+      "dimensions": {
+        "width_px": 390,
+        "height_px": 567,
+        "width_mm": 33,
+        "height_mm": 48,
+        "dpi": 300
+      },
+      "background": {
+        "color": "#FFFFFF",
+        "name": "White"
+      },
+      "face_requirements": {
+        "head_height_percent": 0.70,
+        "eye_level_percent": 0.65,
+        "min_head_height_mm": 28,
+        "max_head_height_mm": 33
+      },
+      "file_requirements": {
+        "max_size_kb": 240,
+        "formats": ["JPEG"],
+        "color_mode": "RGB"
+      },
+      "rules": [
+        "Neutral expression",
+        "White background",
+        "Face covers 70-80% of frame",
+        "No hat or sunglasses"
+      ]
+    },
+    "JAPAN_PASSPORT": {
+      "name": "Japanese Passport",
+      "country": "Japan",
+      "dimensions": {
+        "width_px": 413,
+        "height_px": 531,
+        "width_mm": 35,
+        "height_mm": 45,
+        "dpi": 300
+      },
+      "background": {
+        "color": "#FFFFFF",
+        "name": "White"
+      },
+      "face_requirements": {
+        "head_height_percent": 0.70,
+        "eye_level_percent": 0.60,
+        "min_head_height_mm": 32,
+        "max_head_height_mm": 36
+      },
+      "file_requirements": {
+        "max_size_kb": 300,
+        "formats": ["JPEG"],
+        "color_mode": "RGB"
+      },
+      "rules": [
+        "Neutral expression",
+        "White or light gray background",
+        "Face must be straight and centered",
+        "No glasses or contacts with tint"
+      ]
+    },
+    "GERMANY_PASSPORT": {
+      "name": "German Passport",
+      "country": "Germany",
+      "dimensions": {
+        "width_px": 413,
+        "height_px": 531,
+        "width_mm": 35,
+        "height_mm": 45,
+        "dpi": 300
+      },
+      "background": {
+        "color": "#E8E8E8",
+        "name": "Light Gray"
+      },
+      "face_requirements": {
+        "head_height_percent": 0.75,
+        "eye_level_percent": 0.65,
+        "min_head_height_mm": 32,
+        "max_head_height_mm": 36
+      },
+      "file_requirements": {
+        "max_size_kb": 500,
+        "formats": ["JPEG"],
+        "color_mode": "RGB"
+      },
+      "rules": [
+        "Neutral expression, mouth closed",
+        "Eyes open, looking into camera",
+        "Light gray background",
+        "No glasses"
+      ]
+    }
+  }
+}
