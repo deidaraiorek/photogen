@@ -1,3 +1,6 @@
+import os
+import urllib.request
+
 import cv2
 import mediapipe as mp
 import numpy as np
@@ -6,14 +9,28 @@ from PIL import Image
 _FRONTAL_CASCADE = cv2.CascadeClassifier(cv2.data.haarcascades + "haarcascade_frontalface_alt2.xml")
 _PROFILE_CASCADE = cv2.CascadeClassifier(cv2.data.haarcascades + "haarcascade_frontalface_default.xml")
 
-_mp_face = mp.solutions.face_detection
+_MODEL_URL = "https://storage.googleapis.com/mediapipe-models/face_detector/blaze_face_short_range/float16/latest/blaze_face_short_range.tflite"
+_MODEL_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), "models")
+_MODEL_PATH = os.path.join(_MODEL_DIR, "blaze_face_short_range.tflite")
+
 _mp_detector = None
+
+
+def _ensure_model():
+    if not os.path.exists(_MODEL_PATH):
+        os.makedirs(_MODEL_DIR, exist_ok=True)
+        urllib.request.urlretrieve(_MODEL_URL, _MODEL_PATH)
 
 
 def _get_mp_detector():
     global _mp_detector
     if _mp_detector is None:
-        _mp_detector = _mp_face.FaceDetection(model_selection=1, min_detection_confidence=0.5)
+        _ensure_model()
+        options = mp.tasks.vision.FaceDetectorOptions(
+            base_options=mp.tasks.BaseOptions(model_asset_path=_MODEL_PATH),
+            min_detection_confidence=0.5,
+        )
+        _mp_detector = mp.tasks.vision.FaceDetector.create_from_options(options)
     return _mp_detector
 
 
@@ -21,29 +38,26 @@ def _detect_mediapipe(image: Image.Image) -> list[dict]:
     img_array = np.array(image.convert("RGB"))
     ih, iw = img_array.shape[:2]
     detector = _get_mp_detector()
-    results = detector.process(img_array)
+    mp_image = mp.Image(image_format=mp.ImageFormat.SRGB, data=img_array)
+    results = detector.detect(mp_image)
 
     if not results.detections:
         return []
 
     faces = []
     for det in results.detections:
-        bb = det.location_data.relative_bounding_box
-        x = int(bb.xmin * iw)
-        y = int(bb.ymin * ih)
-        w = int(bb.width * iw)
-        h = int(bb.height * ih)
-        x = max(0, x)
-        y = max(0, y)
-        w = min(w, iw - x)
-        h = min(h, ih - y)
+        bb = det.bounding_box
+        x = max(0, bb.origin_x)
+        y = max(0, bb.origin_y)
+        w = min(bb.width, iw - x)
+        h = min(bb.height, ih - y)
         if w > 0 and h > 0:
             faces.append({
                 "x": x,
                 "y": y,
                 "width": w,
                 "height": h,
-                "confidence": round(det.score[0], 3),
+                "confidence": round(det.categories[0].score, 3),
             })
 
     faces.sort(key=lambda f: f["width"] * f["height"], reverse=True)

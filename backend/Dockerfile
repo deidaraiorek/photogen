@@ -16,6 +16,8 @@ ENV HOME="/home/user"
 
 RUN python -c "from rembg import new_session; new_session('birefnet-portrait')"
 
+RUN mkdir -p /app/app/core/models && python -c "import urllib.request; urllib.request.urlretrieve('https://storage.googleapis.com/mediapipe-models/face_detector/blaze_face_short_range/float16/latest/blaze_face_short_range.tflite', '/app/app/core/models/blaze_face_short_range.tflite')"
+
 COPY --chown=user . /app
 
 EXPOSE 7860
