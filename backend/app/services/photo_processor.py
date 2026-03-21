@@ -2,7 +2,7 @@ import base64
 import io
 import time
 
-from PIL import Image
+from PIL import Image, ImageOps
 
 from app.core.background_removal import remove_background
 from app.core.cropping import auto_crop_passport, center_crop
@@ -35,7 +35,9 @@ def process_photo(
     file_req = spec["file_requirements"]
     bg_color = background_color or spec["background"]["color"]
 
-    image = Image.open(io.BytesIO(image_bytes)).convert("RGB")
+    image = Image.open(io.BytesIO(image_bytes))
+    image = ImageOps.exif_transpose(image)
+    image = image.convert("RGB")
 
     if do_auto_enhance:
         image = auto_enhance(image)
