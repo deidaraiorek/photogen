@@ -55,21 +55,27 @@ def _detect_mediapipe(image: Image.Image) -> list[dict]:
         y = bb.origin_y
         w = bb.width
         h = bb.height
-        top_expand = int(h * 0.18)
-        bot_expand = int(h * 0.08)
+        top_expand = int(h * 0.10)
         y = y - top_expand
-        h = h + top_expand + bot_expand
+        h = h + top_expand
         x = max(0, x)
         y = max(0, y)
         w = min(w, iw - x)
         h = min(h, ih - y)
         if w > 0 and h > 0:
+            eye_y = None
+            mouth_y = None
+            if len(det.keypoints) >= 4:
+                eye_y = int((det.keypoints[0].y + det.keypoints[1].y) / 2 * ih)
+                mouth_y = int(det.keypoints[3].y * ih)
             faces.append({
                 "x": x,
                 "y": y,
                 "width": w,
                 "height": h,
                 "confidence": round(det.categories[0].score, 3),
+                "eye_y": eye_y,
+                "mouth_y": mouth_y,
             })
 
     faces.sort(key=lambda f: f["width"] * f["height"], reverse=True)

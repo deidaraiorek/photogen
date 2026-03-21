@@ -11,6 +11,9 @@ frontend/node_modules/
 frontend/.next/
 frontend/.env.local
 
+# Models
+*.tflite
+
 # Misc
 .DS_Store
 *.log

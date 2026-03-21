@@ -185,7 +185,7 @@ export default function Home() {
                 </div>
               )}
 
-              {hasResult && processedUrl && previewUrl && (
+              {hasResult && processedUrl && (
                 <div className="space-y-4 animate-fade-in">
                   <div className="grid gap-4 lg:grid-cols-5">
                     {/* Before / After comparison */}

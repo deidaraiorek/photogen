@@ -1,6 +1,5 @@
 export const COUNTRY_LABELS: Record<string, string> = {
-  US_PASSPORT: '🇺🇸 US Passport',
-  US_VISA: '🇺🇸 US Visa',
+  US_PASSPORT_VISA: '🇺🇸 US Passport / Visa',
   EU_PASSPORT: '🇪🇺 EU / Schengen Passport',
   UK_PASSPORT: '🇬🇧 UK Passport',
   CANADA_PASSPORT: '🇨🇦 Canadian Passport',
@@ -11,4 +10,4 @@ export const COUNTRY_LABELS: Record<string, string> = {
   GERMANY_PASSPORT: '🇩🇪 German Passport',
 }
 
-export const DEFAULT_DOCUMENT = 'US_PASSPORT'
+export const DEFAULT_DOCUMENT = 'US_PASSPORT_VISA'

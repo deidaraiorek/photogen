@@ -3,7 +3,7 @@
 import { MouseEvent, TouchEvent, useCallback, useRef, useState } from 'react'
 
 interface BeforeAfterProps {
-  before: string
+  before: string | null
   after: string
   afterStyle?: React.CSSProperties
 }
@@ -37,20 +37,24 @@ export default function BeforeAfter({ before, after, afterStyle }: BeforeAfterPr
       onTouchMove={onTouchMove}
     >
       <img src={after} alt="Processed" className="absolute inset-0 w-full h-full object-contain" draggable={false} style={afterStyle} />
-      <div className="absolute inset-0 overflow-hidden" style={{ width: `${position}%` }}>
-        <img src={before} alt="Original" className="absolute inset-0 w-full h-full object-cover" draggable={false} style={{ minWidth: `${(100 / position) * 100}%`, right: 'auto' }} />
-      </div>
-      <div
-        className="absolute top-0 bottom-0 w-0.5 bg-white"
-        style={{ left: `${position}%`, transform: 'translateX(-50%)' }}
-      >
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 h-8 w-8 rounded-full bg-white shadow-md border border-gray-200 flex items-center justify-center">
-          <svg className="h-4 w-4 text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 9l-4 3 4 3M16 9l4 3-4 3" />
-          </svg>
-        </div>
-      </div>
-      <div className="absolute top-2 left-2 sm:top-2.5 sm:left-2.5 rounded bg-white/90 px-1.5 sm:px-2 py-0.5 text-[11px] font-medium text-gray-600 shadow-sm">Before</div>
+      {before && (
+        <>
+          <div className="absolute inset-0 overflow-hidden" style={{ width: `${position}%` }}>
+            <img src={before} alt="Original" className="absolute inset-0 w-full h-full object-cover" draggable={false} style={{ minWidth: `${(100 / position) * 100}%`, right: 'auto' }} />
+          </div>
+          <div
+            className="absolute top-0 bottom-0 w-0.5 bg-white"
+            style={{ left: `${position}%`, transform: 'translateX(-50%)' }}
+          >
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 h-8 w-8 rounded-full bg-white shadow-md border border-gray-200 flex items-center justify-center">
+              <svg className="h-4 w-4 text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 9l-4 3 4 3M16 9l4 3-4 3" />
+              </svg>
+            </div>
+          </div>
+          <div className="absolute top-2 left-2 sm:top-2.5 sm:left-2.5 rounded bg-white/90 px-1.5 sm:px-2 py-0.5 text-[11px] font-medium text-gray-600 shadow-sm">Before</div>
+        </>
+      )}
       <div className="absolute top-2 right-2 sm:top-2.5 sm:right-2.5 rounded bg-primary-600/90 px-1.5 sm:px-2 py-0.5 text-[11px] font-medium text-white shadow-sm">After</div>
     </div>
   )

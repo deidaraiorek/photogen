@@ -2,6 +2,20 @@
 
 import { useCallback, useState } from 'react'
 import { validateImageFile } from '@/lib/utils'
+import heic2any from 'heic2any'
+
+function isHeic(file: File): boolean {
+  if (file.type === 'image/heic' || file.type === 'image/heif') return true
+  const ext = file.name.toLowerCase().split('.').pop() || ''
+  return ext === 'heic' || ext === 'heif'
+}
+
+function setPreview(url: string, setter: React.Dispatch<React.SetStateAction<string | null>>) {
+  setter((prev) => {
+    if (prev) URL.revokeObjectURL(prev)
+    return url
+  })
+}
 
 export function useImageUpload() {
   const [file, setFile] = useState<File | null>(null)
@@ -16,11 +30,19 @@ export function useImageUpload() {
     }
     setError(null)
     setFile(incoming)
-    const url = URL.createObjectURL(incoming)
-    setPreviewUrl((prev) => {
-      if (prev) URL.revokeObjectURL(prev)
-      return url
-    })
+
+    if (isHeic(incoming)) {
+      heic2any({ blob: incoming, toType: 'image/jpeg', quality: 0.8 })
+        .then((result) => {
+          const blob = Array.isArray(result) ? result[0] : result
+          setPreview(URL.createObjectURL(blob), setPreviewUrl)
+        })
+        .catch(() => {
+          setPreview(URL.createObjectURL(incoming), setPreviewUrl)
+        })
+    } else {
+      setPreview(URL.createObjectURL(incoming), setPreviewUrl)
+    }
     return true
   }, [])
 
