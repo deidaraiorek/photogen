@@ -58,7 +58,7 @@ export default function ImageEditor({ options, onChange, onProcess, status, hasF
                 type="button"
                 title={label}
                 onClick={() => set('background_color', color)}
-                className={`h-7 w-7 rounded-lg border-2 transition-all duration-150 ${
+                className={`h-9 w-9 sm:h-7 sm:w-7 rounded-lg border-2 transition-all duration-150 ${
                   options.background_color === color
                     ? 'border-primary-500 ring-2 ring-primary-100 scale-110'
                     : 'border-gray-200 hover:border-gray-300'
@@ -66,7 +66,7 @@ export default function ImageEditor({ options, onChange, onProcess, status, hasF
                 style={{ backgroundColor: color }}
               />
             ))}
-            <label className="h-7 w-7 rounded-lg border-2 border-dashed border-gray-200 overflow-hidden cursor-pointer hover:border-gray-300 transition-colors flex items-center justify-center">
+            <label className="h-9 w-9 sm:h-7 sm:w-7 rounded-lg border-2 border-dashed border-gray-200 overflow-hidden cursor-pointer hover:border-gray-300 transition-colors flex items-center justify-center">
               <input
                 type="color"
                 value={options.background_color || '#FFFFFF'}

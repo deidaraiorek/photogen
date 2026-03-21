@@ -57,7 +57,7 @@ export default function PhotoUploader({ onFileSelect, previewUrl, error, onClear
             </div>
           )}
           <div className="absolute inset-0 pointer-events-none">
-            <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-40 h-52 rounded-full border-2 border-white/40" />
+            <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-28 h-36 sm:w-40 sm:h-52 rounded-full border-2 border-white/40" />
           </div>
         </div>
         <div className="flex gap-3">
@@ -76,7 +76,7 @@ export default function PhotoUploader({ onFileSelect, previewUrl, error, onClear
   if (previewUrl) {
     return (
       <div className="space-y-3 animate-fade-in">
-        <div className="relative rounded-lg overflow-hidden border border-gray-200 aspect-square max-w-52 mx-auto">
+        <div className="relative rounded-lg overflow-hidden border border-gray-200 aspect-square max-w-40 sm:max-w-52 mx-auto">
           <img src={previewUrl} alt="Uploaded" className="w-full h-full object-cover" />
         </div>
         <div className="flex justify-center">
@@ -111,7 +111,7 @@ export default function PhotoUploader({ onFileSelect, previewUrl, error, onClear
             <p className="text-sm font-medium text-gray-700">Drop your photo here</p>
             <p className="text-xs text-gray-400 mt-0.5">or click to browse</p>
           </div>
-          <span className="text-[10px] text-gray-300 tracking-wide">All image formats up to 15 MB</span>
+          <span className="text-[11px] sm:text-[10px] text-gray-300 tracking-wide">All image formats up to 15 MB</span>
         </div>
         <input
           ref={fileInputRef}

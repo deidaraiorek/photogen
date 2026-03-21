@@ -111,10 +111,10 @@ export default function Home() {
         </div>
       </header>
 
-      <main className="flex-1 mx-auto max-w-6xl w-full px-4 py-8">
-        <div className="mb-8 text-center">
-          <h2 className="text-2xl font-bold text-gray-900">Create Your Passport Photo</h2>
-          <p className="mt-1.5 text-gray-400 text-sm">AI-powered background removal, face detection, and auto-cropping</p>
+      <main className="flex-1 mx-auto max-w-6xl w-full px-3 sm:px-4 py-4 sm:py-8">
+        <div className="mb-4 sm:mb-8 text-center">
+          <h2 className="text-xl sm:text-2xl font-bold text-gray-900">Create Your Passport Photo</h2>
+          <p className="mt-1.5 text-gray-400 text-xs sm:text-sm">AI-powered background removal, face detection, and auto-cropping</p>
         </div>
 
         {specsLoading ? (
@@ -161,7 +161,7 @@ export default function Home() {
             {/* Right column: results */}
             <div className="lg:col-span-2 space-y-4">
               {status === 'idle' && !result && (
-                <div className="rounded-xl border-2 border-dashed border-gray-200 bg-white p-12 flex flex-col items-center justify-center text-center min-h-96">
+                <div className="rounded-xl border-2 border-dashed border-gray-200 bg-white p-6 sm:p-12 flex flex-col items-center justify-center text-center min-h-48 sm:min-h-96">
                   <svg className="h-12 w-12 text-gray-200 mb-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
                   </svg>
@@ -171,11 +171,11 @@ export default function Home() {
               )}
 
               {status === 'processing' && (
-                <div className="rounded-xl border border-gray-200 bg-white p-12 flex flex-col items-center justify-center min-h-96 space-y-4 animate-fade-in">
+                <div className="rounded-xl border border-gray-200 bg-white p-6 sm:p-12 flex flex-col items-center justify-center min-h-48 sm:min-h-96 space-y-4 animate-fade-in">
                   <Spinner size="lg" />
                   <div className="text-center">
                     <p className="font-semibold text-gray-700">Processing your photo...</p>
-                    <p className="text-sm text-gray-400 mt-1">This usually takes 5-15 seconds</p>
+                    <p className="text-sm text-gray-400 mt-1">This usually takes 1 minute</p>
                   </div>
                   <div className="flex flex-col items-center gap-1.5 text-xs text-gray-300">
                     {['Detecting face', 'Removing background', 'Auto-cropping to spec', 'Enhancing quality'].map((step) => (
@@ -187,21 +187,21 @@ export default function Home() {
 
               {hasResult && processedUrl && previewUrl && (
                 <div className="space-y-4 animate-fade-in">
-                  <div className="grid gap-4 lg:grid-cols-2">
+                  <div className="grid gap-4 lg:grid-cols-5">
                     {/* Before / After comparison */}
-                    <Card title="Before / After">
+                    <Card title="Before / After" className="lg:col-span-3">
                       <BeforeAfter before={previewUrl} after={processedUrl} afterStyle={{ filter: postFilter }} />
                       <button
                         type="button"
                         onClick={handleManualCrop}
-                        className="mt-3 w-full py-2 rounded-lg border border-gray-200 bg-gray-50 hover:bg-white text-xs text-gray-500 hover:text-gray-700 transition-colors"
+                        className="mt-3 w-full py-2.5 sm:py-2 rounded-lg border border-gray-200 bg-gray-50 hover:bg-white text-xs text-gray-500 active:bg-white transition-colors"
                       >
                         AI crop not right? <span className="font-medium text-primary-600">Manual crop</span>
                       </button>
                     </Card>
 
                     {/* Fine-tune + Download */}
-                    <div className="space-y-4">
+                    <div className="space-y-4 lg:col-span-2">
                       <Card title="Fine-tune">
                         <div className="space-y-3">
                           <div>
@@ -243,7 +243,7 @@ export default function Home() {
 
                   {/* Print sheet */}
                   <Card title="Print Sheet Preview">
-                    <div className="grid grid-cols-4 gap-2 p-3 bg-gray-50 rounded-lg">
+                    <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 p-3 bg-gray-50 rounded-lg">
                       {Array.from({ length: 4 }).map((_, i) => (
                         <div key={i} className="rounded overflow-hidden border border-gray-200 bg-white" style={{ aspectRatio: '3 / 4' }}>
                           <img src={processedUrl} alt={`Copy ${i + 1}`} className="w-full h-full object-contain" style={{ filter: postFilter }} />

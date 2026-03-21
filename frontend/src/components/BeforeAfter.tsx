@@ -50,8 +50,8 @@ export default function BeforeAfter({ before, after, afterStyle }: BeforeAfterPr
           </svg>
         </div>
       </div>
-      <div className="absolute top-2.5 left-2.5 rounded bg-white/90 px-2 py-0.5 text-[10px] font-medium text-gray-600 shadow-sm">Before</div>
-      <div className="absolute top-2.5 right-2.5 rounded bg-primary-600/90 px-2 py-0.5 text-[10px] font-medium text-white shadow-sm">After</div>
+      <div className="absolute top-2 left-2 sm:top-2.5 sm:left-2.5 rounded bg-white/90 px-1.5 sm:px-2 py-0.5 text-[11px] font-medium text-gray-600 shadow-sm">Before</div>
+      <div className="absolute top-2 right-2 sm:top-2.5 sm:right-2.5 rounded bg-primary-600/90 px-1.5 sm:px-2 py-0.5 text-[11px] font-medium text-white shadow-sm">After</div>
     </div>
   )
 }

@@ -93,20 +93,20 @@ export default function ManualCropModal({ imageSrc, spec, bgColor, onApply, onCl
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-gray-900/50 backdrop-blur-sm p-4 animate-fade-in">
-      <div className="bg-white rounded-xl shadow-2xl overflow-hidden flex flex-col w-full max-w-lg max-h-[90vh]">
-        <div className="flex items-center justify-between px-5 py-3.5 border-b border-gray-100">
+      <div className="bg-white rounded-xl shadow-2xl overflow-hidden flex flex-col w-full max-w-[calc(100vw-2rem)] sm:max-w-lg max-h-[90vh]">
+        <div className="flex items-center justify-between px-3 sm:px-5 py-3 sm:py-3.5 border-b border-gray-100">
           <div>
             <h3 className="text-gray-800 font-semibold text-sm">Manual Crop</h3>
             <p className="text-gray-400 text-xs mt-0.5">Drag to move, scroll to zoom</p>
           </div>
-          <button onClick={onClose} className="text-gray-400 hover:text-gray-600 p-1 rounded-lg hover:bg-gray-100 transition-colors">
+          <button onClick={onClose} className="text-gray-400 hover:text-gray-600 p-2 rounded-lg hover:bg-gray-100 active:bg-gray-100 transition-colors">
             <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
             </svg>
           </button>
         </div>
 
-        <div className="relative bg-gray-900" style={{ height: '55vh', minHeight: 280 }}>
+        <div className="relative bg-gray-900" style={{ height: '50vh', minHeight: 220 }}>
           <Cropper
             image={imageSrc}
             crop={crop}
@@ -132,7 +132,7 @@ export default function ManualCropModal({ imageSrc, spec, bgColor, onApply, onCl
           />
         </div>
 
-        <div className="px-5 py-4 border-t border-gray-100 space-y-3">
+        <div className="px-3 sm:px-5 py-3 sm:py-4 border-t border-gray-100 space-y-3">
           <div className="flex items-center gap-3">
             <span className="text-xs text-gray-400">-</span>
             <input
