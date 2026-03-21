@@ -10,15 +10,19 @@ _FRONTAL_CASCADE = cv2.CascadeClassifier(cv2.data.haarcascades + "haarcascade_fr
 _PROFILE_CASCADE = cv2.CascadeClassifier(cv2.data.haarcascades + "haarcascade_frontalface_default.xml")
 
 _MODEL_URL = "https://storage.googleapis.com/mediapipe-models/face_detector/blaze_face_short_range/float16/latest/blaze_face_short_range.tflite"
-_MODEL_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), "models")
-_MODEL_PATH = os.path.join(_MODEL_DIR, "blaze_face_short_range.tflite")
+_MODEL_NAME = "blaze_face_short_range.tflite"
+_SEARCH_DIRS = [
+    os.path.join(os.path.expanduser("~"), "models"),
+    os.path.join(os.path.dirname(os.path.abspath(__file__)), "models"),
+]
+_MODEL_PATH = next((os.path.join(d, _MODEL_NAME) for d in _SEARCH_DIRS if os.path.exists(os.path.join(d, _MODEL_NAME))), os.path.join(_SEARCH_DIRS[0], _MODEL_NAME))
 
 _mp_detector = None
 
 
 def _ensure_model():
     if not os.path.exists(_MODEL_PATH):
-        os.makedirs(_MODEL_DIR, exist_ok=True)
+        os.makedirs(os.path.dirname(_MODEL_PATH), exist_ok=True)
         urllib.request.urlretrieve(_MODEL_URL, _MODEL_PATH)
 
 
