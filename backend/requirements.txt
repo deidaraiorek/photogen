@@ -46,6 +46,7 @@ python-multipart==0.0.22
 PyYAML==6.0.3
 referencing==0.37.0
 rembg==2.0.73
+onnxruntime==1.22.0
 requests==2.32.5
 rpds-py==0.30.0
 scikit-image==0.26.0

@@ -25,26 +25,29 @@ function buildOverlaySvg(aspect: number, headPct: number, eyePct: number): strin
   const cx = w / 2
 
   const eyeY = (1 - eyePct) * h
-  const ovalH = headPct * h
+  const eyeFromCrown = 0.5
+  const crownY = eyeY - (headPct * h * eyeFromCrown)
+  const chinY = crownY + headPct * h
+  const ovalCY = (crownY + chinY) / 2
+  const ovalH = chinY - crownY
   const ovalW = ovalH * 0.7
-  const ovalCY = eyeY
-  const crownY = ovalCY - ovalH / 2
-  const chinY = ovalCY + ovalH / 2
 
-  const labelX = w - 6
+  const pad = 8
+  const lineL = pad
+  const lineR = w - pad
 
   const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="${w}" height="${h}" viewBox="0 0 ${w} ${h}">
     <ellipse cx="${cx}" cy="${ovalCY}" rx="${ovalW / 2}" ry="${ovalH / 2}"
-      fill="none" stroke="rgba(255,255,255,0.9)" stroke-width="2" stroke-dasharray="8 4"/>
-    <line x1="6" y1="${eyeY}" x2="${w - 6}" y2="${eyeY}"
-      stroke="rgba(250,204,21,1)" stroke-width="1.5" stroke-dasharray="6 3"/>
-    <text x="${labelX}" y="${eyeY - 5}" fill="rgba(250,204,21,1)" font-size="9" font-weight="bold" font-family="sans-serif" text-anchor="end">EYE LINE</text>
-    <line x1="${cx - ovalW / 2 - 15}" y1="${crownY}" x2="${cx + ovalW / 2 + 15}" y2="${crownY}"
-      stroke="rgba(74,222,128,0.9)" stroke-width="1.5" stroke-dasharray="6 3"/>
-    <text x="${labelX}" y="${crownY + 12}" fill="rgba(74,222,128,0.9)" font-size="8" font-weight="bold" font-family="sans-serif" text-anchor="end">TOP OF HEAD</text>
-    <line x1="${cx - ovalW / 2 - 15}" y1="${chinY}" x2="${cx + ovalW / 2 + 15}" y2="${chinY}"
-      stroke="rgba(74,222,128,0.9)" stroke-width="1.5" stroke-dasharray="6 3"/>
-    <text x="${labelX}" y="${chinY - 5}" fill="rgba(74,222,128,0.9)" font-size="8" font-weight="bold" font-family="sans-serif" text-anchor="end">CHIN</text>
+      fill="none" stroke="#38bdf8" stroke-width="2.5" stroke-dasharray="8 5" opacity="0.9"/>
+    <line x1="${lineL}" y1="${eyeY}" x2="${lineR}" y2="${eyeY}"
+      stroke="#facc15" stroke-width="2" stroke-dasharray="8 4"/>
+    <text x="${lineL + 2}" y="${eyeY - 6}" fill="#facc15" font-size="10" font-weight="bold" font-family="sans-serif">EYE LINE</text>
+    <line x1="${lineL}" y1="${crownY}" x2="${lineR}" y2="${crownY}"
+      stroke="#4ade80" stroke-width="2" stroke-dasharray="8 4"/>
+    <text x="${lineL + 2}" y="${crownY + 13}" fill="#4ade80" font-size="10" font-weight="bold" font-family="sans-serif">TOP OF HEAD</text>
+    <line x1="${lineL}" y1="${chinY}" x2="${lineR}" y2="${chinY}"
+      stroke="#4ade80" stroke-width="2" stroke-dasharray="8 4"/>
+    <text x="${lineL + 2}" y="${chinY - 6}" fill="#4ade80" font-size="10" font-weight="bold" font-family="sans-serif">CHIN</text>
   </svg>`
 
   return `url("data:image/svg+xml,${encodeURIComponent(svg)}")`
