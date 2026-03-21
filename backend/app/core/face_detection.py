@@ -51,10 +51,18 @@ def _detect_mediapipe(image: Image.Image) -> list[dict]:
     faces = []
     for det in results.detections:
         bb = det.bounding_box
-        x = max(0, bb.origin_x)
-        y = max(0, bb.origin_y)
-        w = min(bb.width, iw - x)
-        h = min(bb.height, ih - y)
+        x = bb.origin_x
+        y = bb.origin_y
+        w = bb.width
+        h = bb.height
+        top_expand = int(h * 0.18)
+        bot_expand = int(h * 0.08)
+        y = y - top_expand
+        h = h + top_expand + bot_expand
+        x = max(0, x)
+        y = max(0, y)
+        w = min(w, iw - x)
+        h = min(h, ih - y)
         if w > 0 and h > 0:
             faces.append({
                 "x": x,
