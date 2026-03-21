@@ -23,8 +23,7 @@ export function formatFileSize(kb: number): string {
 }
 
 export function validateImageFile(file: File): string | null {
-  const allowed = ['image/jpeg', 'image/jpg', 'image/png', 'image/webp']
-  if (!allowed.includes(file.type)) return 'Please upload a JPEG, PNG, or WebP image.'
+  if (file.type && !file.type.startsWith('image/')) return 'Please upload an image file.'
   if (file.size > 15 * 1024 * 1024) return 'File size must be under 15MB.'
   return null
 }

@@ -18,7 +18,6 @@ export default function CountrySelector({ value, onChange, specs }: CountrySelec
 
   return (
     <Select
-      label="Document type"
       value={value}
       onChange={(e) => onChange(e.target.value)}
       options={options}

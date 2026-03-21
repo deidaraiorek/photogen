@@ -20,20 +20,31 @@ interface ManualCropModalProps {
 }
 
 function buildOverlaySvg(aspect: number, headPct: number, eyePct: number): string {
-  const w = 200
+  const w = 300
   const h = w / aspect
+  const cx = w / 2
 
-  const eyeFromTop = (1 - eyePct) * h
+  const eyeY = (1 - eyePct) * h
   const ovalH = headPct * h
-  const ovalW = ovalH * 0.67
-  const ovalCY = eyeFromTop
+  const ovalW = ovalH * 0.7
+  const ovalCY = eyeY
+  const crownY = ovalCY - ovalH / 2
+  const chinY = ovalCY + ovalH / 2
+
+  const labelX = w - 6
 
   const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="${w}" height="${h}" viewBox="0 0 ${w} ${h}">
-    <ellipse cx="${w / 2}" cy="${ovalCY}" rx="${ovalW / 2}" ry="${ovalH / 2}"
-      fill="none" stroke="rgba(147,197,253,0.85)" stroke-width="1.5" stroke-dasharray="5 3"/>
-    <line x1="${w / 2 - ovalW / 2 - 6}" y1="${eyeFromTop}" x2="${w / 2 + ovalW / 2 + 6}" y2="${eyeFromTop}"
-      stroke="rgba(147,197,253,0.7)" stroke-width="1" stroke-dasharray="4 3"/>
-    <text x="${w / 2 + ovalW / 2 + 8}" y="${eyeFromTop + 3}" fill="rgba(147,197,253,0.9)" font-size="6" font-weight="bold" font-family="sans-serif">eyes</text>
+    <ellipse cx="${cx}" cy="${ovalCY}" rx="${ovalW / 2}" ry="${ovalH / 2}"
+      fill="none" stroke="rgba(255,255,255,0.9)" stroke-width="2" stroke-dasharray="8 4"/>
+    <line x1="6" y1="${eyeY}" x2="${w - 6}" y2="${eyeY}"
+      stroke="rgba(250,204,21,1)" stroke-width="1.5" stroke-dasharray="6 3"/>
+    <text x="${labelX}" y="${eyeY - 5}" fill="rgba(250,204,21,1)" font-size="9" font-weight="bold" font-family="sans-serif" text-anchor="end">EYE LINE</text>
+    <line x1="${cx - ovalW / 2 - 15}" y1="${crownY}" x2="${cx + ovalW / 2 + 15}" y2="${crownY}"
+      stroke="rgba(74,222,128,0.9)" stroke-width="1.5" stroke-dasharray="6 3"/>
+    <text x="${labelX}" y="${crownY + 12}" fill="rgba(74,222,128,0.9)" font-size="8" font-weight="bold" font-family="sans-serif" text-anchor="end">TOP OF HEAD</text>
+    <line x1="${cx - ovalW / 2 - 15}" y1="${chinY}" x2="${cx + ovalW / 2 + 15}" y2="${chinY}"
+      stroke="rgba(74,222,128,0.9)" stroke-width="1.5" stroke-dasharray="6 3"/>
+    <text x="${labelX}" y="${chinY - 5}" fill="rgba(74,222,128,0.9)" font-size="8" font-weight="bold" font-family="sans-serif" text-anchor="end">CHIN</text>
   </svg>`
 
   return `url("data:image/svg+xml,${encodeURIComponent(svg)}")`
@@ -78,21 +89,21 @@ export default function ManualCropModal({ imageSrc, spec, bgColor, onApply, onCl
   }
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 p-4">
-      <div className="bg-gray-900 rounded-2xl shadow-2xl overflow-hidden flex flex-col w-full max-w-lg max-h-[90vh]">
-        <div className="flex items-center justify-between px-4 py-3 border-b border-white/10">
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-gray-900/50 backdrop-blur-sm p-4 animate-fade-in">
+      <div className="bg-white rounded-xl shadow-2xl overflow-hidden flex flex-col w-full max-w-lg max-h-[90vh]">
+        <div className="flex items-center justify-between px-5 py-3.5 border-b border-gray-100">
           <div>
-            <h3 className="text-white font-medium text-sm">Manual Crop</h3>
-            <p className="text-white/40 text-xs mt-0.5">Drag to move, scroll to zoom</p>
+            <h3 className="text-gray-800 font-semibold text-sm">Manual Crop</h3>
+            <p className="text-gray-400 text-xs mt-0.5">Drag to move, scroll to zoom</p>
           </div>
-          <button onClick={onClose} className="text-white/50 hover:text-white p-1">
-            <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <button onClick={onClose} className="text-gray-400 hover:text-gray-600 p-1 rounded-lg hover:bg-gray-100 transition-colors">
+            <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
             </svg>
           </button>
         </div>
 
-        <div className="relative bg-gray-950" style={{ height: '60vh', minHeight: 300 }}>
+        <div className="relative bg-gray-900" style={{ height: '55vh', minHeight: 280 }}>
           <Cropper
             image={imageSrc}
             crop={crop}
@@ -106,10 +117,10 @@ export default function ManualCropModal({ imageSrc, spec, bgColor, onApply, onCl
             maxZoom={4}
             showGrid={false}
             style={{
-              containerStyle: { background: '#0a0a14' },
+              containerStyle: { background: '#1e293b' },
               cropAreaStyle: {
                 border: '1.5px solid rgba(255,255,255,0.25)',
-                borderRadius: '4px',
+                borderRadius: '6px',
                 backgroundImage: overlaySvg,
                 backgroundSize: '100% 100%',
                 backgroundRepeat: 'no-repeat',
@@ -118,9 +129,9 @@ export default function ManualCropModal({ imageSrc, spec, bgColor, onApply, onCl
           />
         </div>
 
-        <div className="px-4 py-3 border-t border-white/10 space-y-3">
+        <div className="px-5 py-4 border-t border-gray-100 space-y-3">
           <div className="flex items-center gap-3">
-            <span className="text-white/40 text-xs">-</span>
+            <span className="text-xs text-gray-400">-</span>
             <input
               type="range"
               min={0.3}
@@ -128,20 +139,20 @@ export default function ManualCropModal({ imageSrc, spec, bgColor, onApply, onCl
               step={0.01}
               value={zoom}
               onChange={(e) => setZoom(Number(e.target.value))}
-              className="flex-1 accent-blue-500"
+              className="flex-1"
             />
-            <span className="text-white/40 text-xs">+</span>
+            <span className="text-xs text-gray-400">+</span>
           </div>
-          <div className="flex gap-2">
+          <div className="flex gap-3">
             <button
               onClick={onClose}
-              className="flex-1 py-2 rounded-lg border border-white/15 text-white/70 text-sm hover:bg-white/5"
+              className="flex-1 py-2 rounded-lg border border-gray-200 text-gray-600 text-sm font-medium hover:bg-gray-50 transition-colors"
             >
               Cancel
             </button>
             <button
               onClick={handleApply}
-              className="flex-1 py-2 rounded-lg bg-blue-600 hover:bg-blue-700 text-white text-sm font-medium"
+              className="flex-1 py-2 rounded-lg bg-primary-600 hover:bg-primary-700 text-white text-sm font-medium transition-colors"
             >
               Apply Crop
             </button>

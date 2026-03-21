@@ -31,16 +31,16 @@ export default function DownloadButton({ base64, metadata, processingTimeMs, fil
   }
 
   return (
-    <div className="space-y-4">
-      <div className={`rounded-lg p-3 text-sm ${metadata.compliant ? 'bg-green-50 border border-green-200' : 'bg-yellow-50 border border-yellow-200'}`}>
-        <div className="flex items-center gap-2">
-          <span className="text-lg">{metadata.compliant ? '✅' : '⚠️'}</span>
+    <div className="space-y-3">
+      <div className={`rounded-lg p-3 text-sm ${metadata.compliant ? 'bg-green-50 border border-green-200' : 'bg-amber-50 border border-amber-200'}`}>
+        <div className="flex items-center gap-2.5">
+          <span className="text-base">{metadata.compliant ? '✅' : '⚠️'}</span>
           <div>
-            <p className={`font-medium ${metadata.compliant ? 'text-green-900' : 'text-yellow-900'}`}>
-              {metadata.compliant ? 'Photo meets requirements' : 'Review recommendations'}
+            <p className={`font-medium text-sm ${metadata.compliant ? 'text-green-800' : 'text-amber-800'}`}>
+              {metadata.compliant ? 'Meets requirements' : 'Review recommendations'}
             </p>
-            <p className="text-xs text-gray-500 mt-0.5">
-              {metadata.dimensions.width}×{metadata.dimensions.height}px · {formatFileSize(metadata.file_size_kb)}{processingTimeMs ? ` · ${processingTimeMs.toFixed(0)}ms` : ''}
+            <p className="text-xs text-gray-400 mt-0.5">
+              {metadata.dimensions.width}x{metadata.dimensions.height}px · {formatFileSize(metadata.file_size_kb)}{processingTimeMs ? ` · ${processingTimeMs.toFixed(0)}ms` : ''}
             </p>
           </div>
         </div>
@@ -49,8 +49,8 @@ export default function DownloadButton({ base64, metadata, processingTimeMs, fil
       {metadata.warnings.length > 0 && (
         <ul className="space-y-1">
           {metadata.warnings.map((w, i) => (
-            <li key={i} className="flex items-start gap-1.5 text-xs text-yellow-700">
-              <span className="mt-0.5 flex-shrink-0">⚠</span>
+            <li key={i} className="flex items-start gap-1.5 text-xs text-amber-700">
+              <span className="mt-0.5 shrink-0">⚠</span>
               {w}
             </li>
           ))}
@@ -59,12 +59,12 @@ export default function DownloadButton({ base64, metadata, processingTimeMs, fil
 
       <Button onClick={handleDownload} className="w-full" size="lg">
         <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
         </svg>
         Download Photo
       </Button>
 
-      <p className="text-xs text-gray-400 text-center">
+      <p className="text-[11px] text-gray-300 text-center">
         {metadata.document_name} · {metadata.country}
       </p>
     </div>

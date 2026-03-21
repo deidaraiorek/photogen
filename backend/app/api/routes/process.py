@@ -2,6 +2,7 @@ import base64
 import io
 import json
 
+import pillow_heif
 from fastapi import APIRouter, File, Form, HTTPException, UploadFile
 from PIL import Image
 
@@ -10,9 +11,10 @@ from app.core.face_detection import detect_faces
 from app.models.response import BackgroundRemoveResponse, FaceDetectResponse, FaceLocation, ProcessResponse
 from app.services.photo_processor import process_photo
 
+pillow_heif.register_heif_opener()
+
 router = APIRouter()
 
-ALLOWED_TYPES = {"image/jpeg", "image/png", "image/jpg", "image/webp"}
 MAX_FILE_SIZE = 15 * 1024 * 1024
 
 
@@ -22,12 +24,14 @@ async def process_endpoint(
     document_type: str = Form(...),
     options: str = Form(default="{}"),
 ):
-    if file.content_type not in ALLOWED_TYPES:
-        raise HTTPException(status_code=400, detail=f"Unsupported file type: {file.content_type}")
-
     image_bytes = await file.read()
     if len(image_bytes) > MAX_FILE_SIZE:
         raise HTTPException(status_code=400, detail="File too large. Maximum size is 15MB.")
+
+    try:
+        Image.open(io.BytesIO(image_bytes)).verify()
+    except Exception:
+        raise HTTPException(status_code=400, detail="Unsupported or corrupt image file.")
 
     try:
         opts = json.loads(options)
@@ -54,11 +58,11 @@ async def process_endpoint(
 
 @router.post("/detect-face", response_model=FaceDetectResponse)
 async def detect_face_endpoint(file: UploadFile = File(...)):
-    if file.content_type not in ALLOWED_TYPES:
-        raise HTTPException(status_code=400, detail="Unsupported file type")
-
     image_bytes = await file.read()
-    image = Image.open(io.BytesIO(image_bytes)).convert("RGB")
+    try:
+        image = Image.open(io.BytesIO(image_bytes)).convert("RGB")
+    except Exception:
+        raise HTTPException(status_code=400, detail="Unsupported or corrupt image file.")
     faces = detect_faces(image)
 
     return {
@@ -73,11 +77,11 @@ async def remove_bg_endpoint(
     file: UploadFile = File(...),
     background_color: str = Form(default="#FFFFFF"),
 ):
-    if file.content_type not in ALLOWED_TYPES:
-        raise HTTPException(status_code=400, detail="Unsupported file type")
-
     image_bytes = await file.read()
-    image = Image.open(io.BytesIO(image_bytes)).convert("RGB")
+    try:
+        image = Image.open(io.BytesIO(image_bytes)).convert("RGB")
+    except Exception:
+        raise HTTPException(status_code=400, detail="Unsupported or corrupt image file.")
     result = remove_background(image, bg_color=background_color)
 
     buffer = io.BytesIO()
