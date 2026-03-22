@@ -30,11 +30,7 @@ for 10+ countries. No signup. No watermarks. No data stored.
 
 ## Demo
 
-<div align="center">
-
-<video src="frontend/public/demo.mp4" width="600" controls></video>
-
-</div>
+https://github.com/user-attachments/assets/564aa3e6-de8d-40bb-81aa-8ddfce3dc8fe
 
 <br/>
 
