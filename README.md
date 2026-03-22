@@ -1,61 +1,109 @@
+<a name="readme-top"></a>
+
 <div align="center">
 
-<img src="frontend/public/logo-cropped.png" alt="PhotoGen" width="80" />
+<img src="frontend/public/logo.jpg" alt="PhotoGen" width="140" />
+
+<br/>
 
 # PhotoGen
 
-**Free, open-source passport photo maker powered by AI.**
+### Your passport photo, done right. For free.
 
-Background removal, face detection, and auto-cropping for 10+ countries — no data stored, no account required.
+AI-powered face detection, background removal, and auto-cropping<br/>
+for 10+ countries. No signup. No watermarks. No data stored.
 
-[![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
-[![Python](https://img.shields.io/badge/python-3.11+-3776AB?logo=python&logoColor=white)](https://python.org)
-[![Next.js](https://img.shields.io/badge/Next.js-16-000000?logo=next.js&logoColor=white)](https://nextjs.org)
-[![FastAPI](https://img.shields.io/badge/FastAPI-0.135-009688?logo=fastapi&logoColor=white)](https://fastapi.tiangolo.com)
+<br/>
 
-[Demo](#demo) · [Features](#features) · [Getting Started](#getting-started) · [Supported Documents](#supported-documents) · [Tech Stack](#tech-stack) · [API](#api) · [Deployment](#deployment) · [License](#license)
+[![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg?style=for-the-badge)](LICENSE)
+[![Python](https://img.shields.io/badge/python-3.11+-3776AB?style=for-the-badge&logo=python&logoColor=white)](https://python.org)
+[![Next.js](https://img.shields.io/badge/Next.js-16-000000?style=for-the-badge&logo=next.js&logoColor=white)](https://nextjs.org)
+[![FastAPI](https://img.shields.io/badge/FastAPI-0.135-009688?style=for-the-badge&logo=fastapi&logoColor=white)](https://fastapi.tiangolo.com)
+
+<br/>
+
+[Demo](#demo) · [Features](#-features) · [Getting Started](#-getting-started) · [Supported Countries](#-supported-documents) · [Tech Stack](#-tech-stack) · [API](#-api) · [Deployment](#-deployment) · [License](#-license)
+
+<br/>
 
 </div>
 
----
-
 ## Demo
 
-<!--
-  Replace the placeholder below with your video demo.
-  Upload an .mp4 to a GitHub issue or drag it into the README editor,
-  then paste the resulting URL below.
--->
+<div align="center">
 
-https://github.com/user-attachments/assets/REPLACE_WITH_YOUR_VIDEO_ID
+<video src="frontend/public/demo.mp4" width="600" controls></video>
 
-> **Add your demo video here.** Upload an `.mp4` via GitHub (drag into an issue or PR), then replace the URL above.
+</div>
 
----
+<br/>
 
-## Features
+## ✨ Features
 
-- **AI Face Detection** — MediaPipe BlazeFace primary, Haar cascade fallback
-- **Background Removal** — BiRefNet-portrait model with alpha matting for clean hair edges
-- **Auto-Crop** — Crops to exact government specs (head height %, eye position, dimensions)
-- **Image Enhancement** — White balance correction + adaptive CLAHE contrast
-- **Post-Processing** — Real-time brightness, contrast, and saturation sliders
-- **Manual Crop** — Fallback tool with oval face template and alignment guides
-- **Before / After** — Side-by-side comparison slider
-- **Print Sheet** — 4-up grid layout ready for photo center printing
-- **Wide Format Support** — HEIC, AVIF, JPEG, PNG, WebP, BMP
-- **Compliance Validation** — Checks dimensions, head size, eye position, and file size
-- **300 DPI Output** — Publication-quality JPEG export
-- **100% Free** — No accounts, no watermarks, no data stored
+<table>
+<tr>
+<td width="50%">
 
----
+### AI Processing
+- **Face Detection** via MediaPipe BlazeFace with Haar cascade fallback
+- **Background Removal** using BiRefNet-portrait + alpha matting
+- **Auto-Crop** to exact government specs (head %, eye position, dimensions)
+- **Enhancement** with white balance + adaptive CLAHE contrast
 
-## Getting Started
+</td>
+<td width="50%">
+
+### User Tools
+- **Post-Processing** sliders for brightness, contrast, saturation
+- **Manual Crop** with oval face template and alignment guides
+- **Before / After** side-by-side comparison slider
+- **Print Sheet** 4-up grid ready for photo center printing
+
+</td>
+</tr>
+<tr>
+<td width="50%">
+
+### Output Quality
+- **300 DPI** publication-quality JPEG export
+- **Compliance Validation** for dimensions, head size, eye position, file size
+- **10+ Country Specs** including US, EU, UK, Canada, Australia, India, China, Japan
+
+</td>
+<td width="50%">
+
+### Zero Friction
+- **Wide Format Support** for HEIC, AVIF, JPEG, PNG, WebP, BMP
+- **100% Free** with no accounts or watermarks
+- **Privacy First** with no data stored on server
+
+</td>
+</tr>
+</table>
+
+<br/>
+
+## 🔄 Processing Pipeline
+
+```mermaid
+graph LR
+    A[📷 Upload] --> B[🎯 Face Detection]
+    B --> C[✂️ Background Removal]
+    C --> D[📐 Auto-Crop]
+    D --> E[🎨 Enhancement]
+    E --> F[💎 300 DPI Output]
+```
+
+<br/>
+
+## 🚀 Getting Started
 
 ### Prerequisites
 
-- Python 3.11+
-- Node.js 18+
+| Requirement | Version |
+|---|---|
+| Python | 3.11+ |
+| Node.js | 18+ |
 
 ### Backend
 
@@ -67,10 +115,12 @@ pip install -r requirements.txt
 uvicorn app.main:app --reload --port 8000
 ```
 
-The ML model (~170MB BiRefNet) downloads automatically on first request.
+> The ML model (~170MB BiRefNet) downloads automatically on first request.
 
-- API: http://localhost:8000
-- Interactive docs: http://localhost:8000/docs
+| | URL |
+|---|---|
+| API | http://localhost:8000 |
+| Docs | http://localhost:8000/docs |
 
 ### Frontend
 
@@ -82,70 +132,60 @@ npm run dev
 
 Open http://localhost:3000
 
----
+<br/>
 
-## Processing Pipeline
-
-```
-Upload Photo
-    ↓
-Face Detection (MediaPipe BlazeFace → Haar cascade fallback)
-    ↓
-Background Removal (BiRefNet-portrait + alpha matting)
-    ↓
-Auto-Crop to Country Specs
-    ↓
-Image Enhancement (white balance + adaptive CLAHE)
-    ↓
-Output (JPEG, 300 DPI, passport-compliant compression)
-```
-
----
-
-## Supported Documents
+## 🌍 Supported Documents
 
 | Document | Country | Size | Head Height | Background |
 |---|---|---|---|---|
-| US Passport | United States | 2×2″ (600×600px) | 50–69% | White |
-| US Visa | United States | 2×2″ (600×600px) | 50–69% | White |
-| EU Passport | EU / Schengen | 35×45mm (413×531px) | 70–80% | Light Gray |
-| UK Passport | United Kingdom | 35×45mm (413×531px) | 70–80% | Light Gray |
-| Canada Passport | Canada | 35×45mm (420×540px) | 71% | White |
-| Australia Passport | Australia | 35×45mm (413×531px) | 75% | White |
-| India Passport | India | 35×45mm (413×531px) | 75% | White |
-| China Visa | China | 33×48mm (390×567px) | 70% | White |
-| Japan Passport | Japan | 35×45mm (413×531px) | 70% | White |
-| Germany Passport | Germany | 35×45mm (413×531px) | 75% | Light Gray |
+| US Passport | 🇺🇸 United States | 2x2" (600x600px) | 50-69% | White |
+| US Visa | 🇺🇸 United States | 2x2" (600x600px) | 50-69% | White |
+| EU Passport | 🇪🇺 EU / Schengen | 35x45mm (413x531px) | 70-80% | Light Gray |
+| UK Passport | 🇬🇧 United Kingdom | 35x45mm (413x531px) | 70-80% | Light Gray |
+| Canada Passport | 🇨🇦 Canada | 35x45mm (420x540px) | 71% | White |
+| Australia Passport | 🇦🇺 Australia | 35x45mm (413x531px) | 75% | White |
+| India Passport | 🇮🇳 India | 35x45mm (413x531px) | 75% | White |
+| China Visa | 🇨🇳 China | 33x48mm (390x567px) | 70% | White |
+| Japan Passport | 🇯🇵 Japan | 35x45mm (413x531px) | 70% | White |
+| Germany Passport | 🇩🇪 Germany | 35x45mm (413x531px) | 75% | Light Gray |
 
----
+<br/>
 
-## Tech Stack
+## 🛠 Tech Stack
 
-### Backend
+<table>
+<tr><th align="left">Backend</th><th align="left">Frontend</th></tr>
+<tr>
+<td valign="top">
 
 | Library | Purpose |
 |---|---|
 | FastAPI + Uvicorn | API server |
-| MediaPipe | Face detection (BlazeFace Tasks API) |
+| MediaPipe | Face detection |
 | OpenCV | Haar cascade fallback |
 | rembg (BiRefNet) | Background removal |
 | PyMatting | Alpha matting |
-| Pillow + pillow-heif | Image I/O including HEIC |
+| Pillow + pillow-heif | Image I/O |
 | scikit-image | CLAHE enhancement |
 
-### Frontend
+</td>
+<td valign="top">
 
 | Library | Purpose |
 |---|---|
 | Next.js 16 + React 19 | App framework |
 | TypeScript | Type safety |
 | Tailwind CSS 4 | Styling |
-| react-easy-crop | Manual crop modal |
+| react-easy-crop | Manual crop |
 | Axios | HTTP client |
 
----
+</td>
+</tr>
+</table>
 
-## API
+<br/>
+
+## 📡 API
 
 | Method | Endpoint | Description |
 |---|---|---|
@@ -156,45 +196,56 @@ Output (JPEG, 300 DPI, passport-compliant compression)
 | `GET` | `/api/requirements/{code}` | Single country spec |
 | `GET` | `/api/health` | Health check |
 
----
+<br/>
 
-## Project Structure
+## 📁 Project Structure
+
+<details>
+<summary>Click to expand</summary>
 
 ```
 photogen/
 ├── backend/
 │   ├── app/
-│   │   ├── api/routes/      # FastAPI endpoints
-│   │   ├── core/            # Face detection, cropping, bg removal, enhancement
-│   │   ├── services/        # Processing orchestrator
-│   │   ├── models/          # Pydantic schemas
-│   │   └── data/            # Country specs loader
+│   │   ├── api/routes/
+│   │   ├── core/
+│   │   ├── services/
+│   │   ├── models/
+│   │   └── data/
 │   ├── Dockerfile
 │   └── requirements.txt
 ├── frontend/
-│   ├── app/                 # Next.js App Router
+│   ├── app/
 │   └── src/
-│       ├── components/      # UI components
-│       ├── hooks/           # useImageUpload, usePhotoProcess
-│       ├── lib/             # API client, types, utils
-│       └── constants/       # Defaults
+│       ├── components/
+│       ├── hooks/
+│       ├── lib/
+│       └── constants/
 └── shared/
     └── photo_requirements.json
 ```
 
----
+</details>
 
-## Deployment
+<br/>
+
+## 🚢 Deployment
 
 | Service | Platform | Notes |
 |---|---|---|
 | Frontend | [Vercel](https://vercel.com) | Edge CDN, auto-deploy from `main` |
-| Backend | [HuggingFace Spaces](https://huggingface.co/spaces) | Docker container, 16GB RAM, 2 vCPU |
+| Backend | [HuggingFace Spaces](https://huggingface.co/spaces) | Docker, 16GB RAM, 2 vCPU |
 
-The backend includes a `Dockerfile` configured for HuggingFace Spaces with pre-downloaded models.
+The backend `Dockerfile` is configured for HuggingFace Spaces with pre-downloaded models.
 
----
+<br/>
 
-## License
+## 📄 License
 
 [MIT](LICENSE)
+
+<div align="right">
+
+[![Back to Top](https://img.shields.io/badge/back_to_top-%E2%86%91-blue?style=flat-square)](#readme-top)
+
+</div>

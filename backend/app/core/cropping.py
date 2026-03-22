@@ -17,7 +17,7 @@ def auto_crop_passport(
     face_w = face["width"]
     face_h = face["height"]
 
-    target_head_px = int(target_height * head_height_percent * 0.75)
+    target_head_px = int(target_height * head_height_percent * 0.83)
     scale = target_head_px / face_h
     eye_y_orig = face.get("eye_y") or (face_y + face_h * 0.35)
 

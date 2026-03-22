@@ -97,7 +97,7 @@ export default function Home() {
         <div className="mx-auto max-w-6xl px-4 py-3 flex items-center justify-between">
           <div className="flex items-center gap-2.5">
             <div className="h-8 w-8 rounded-lg overflow-hidden">
-              <img src="/logo-cropped.png" alt="PhotoGen" className="h-full w-full object-cover" />
+              <img src="/logo.jpg" alt="PhotoGen" className="h-full w-full object-cover" />
             </div>
             <div>
               <h1 className="font-bold text-gray-900 text-sm leading-none">PhotoGen</h1>

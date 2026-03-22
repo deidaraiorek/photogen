@@ -2,7 +2,6 @@
 
 import { useCallback, useState } from 'react'
 import { validateImageFile } from '@/lib/utils'
-import heic2any from 'heic2any'
 
 function isHeic(file: File): boolean {
   if (file.type === 'image/heic' || file.type === 'image/heif') return true
@@ -32,7 +31,7 @@ export function useImageUpload() {
     setFile(incoming)
 
     if (isHeic(incoming)) {
-      heic2any({ blob: incoming, toType: 'image/jpeg', quality: 0.8 })
+      import('heic2any').then(({ default: heic2any }) => heic2any({ blob: incoming, toType: 'image/jpeg', quality: 0.8 }))
         .then((result) => {
           const blob = Array.isArray(result) ? result[0] : result
           setPreview(URL.createObjectURL(blob), setPreviewUrl)
