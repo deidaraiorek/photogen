@@ -87,6 +87,7 @@ export default function PhotoTool() {
 
   const processedUrl = result ? base64ToObjectUrl(result.processed_image) : null
   const bgRemovedUrl = useMemo(() => result?.bg_removed_image ? base64ToObjectUrl(result.bg_removed_image) : null, [result?.bg_removed_image])
+  const cropSourceUrl = bgRemovedUrl || processedUrl
   const postFilter = `brightness(${postBrightness}%) contrast(${postContrast}%) saturate(${postSaturation}%)`
   const selectedSpec = specs[documentType]
   const hasResult = status === 'done' && result
@@ -239,9 +240,9 @@ export default function PhotoTool() {
         </div>
       </div>
 
-      {showManualCrop && bgRemovedUrl && selectedSpec && (
+      {showManualCrop && cropSourceUrl && selectedSpec && (
         <ManualCropModal
-          imageSrc={bgRemovedUrl}
+          imageSrc={cropSourceUrl}
           spec={selectedSpec}
           bgColor={options.background_color || selectedSpec.background.color}
           onApply={handleManualCropApply}
