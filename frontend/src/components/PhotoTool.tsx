@@ -88,7 +88,7 @@ export default function PhotoTool() {
 
   const processedUrl = result ? base64ToObjectUrl(result.processed_image) : null
   const bgRemovedUrl = useMemo(() => result?.bg_removed_image ? base64ToObjectUrl(result.bg_removed_image) : null, [result?.bg_removed_image])
-  const cropSourceUrl = bgRemovedUrl || processedUrl
+  const cropSourceUrl = bgRemovedUrl || previewUrl
   const postFilter = `brightness(${postBrightness}%) contrast(${postContrast}%) saturate(${postSaturation}%)`
   const selectedSpec = specs[documentType]
   const hasResult = status === 'done' && result
