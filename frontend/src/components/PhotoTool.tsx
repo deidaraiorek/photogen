@@ -14,6 +14,7 @@ import ImageEditor from '@/components/ImageEditor'
 import PhotoUploader from '@/components/PhotoUploader'
 import RequirementsInfo from '@/components/RequirementsInfo'
 import ManualCropModal from '@/components/ManualCropModal'
+import PrintSheet from '@/components/PrintSheet'
 import Card from '@/components/ui/Card'
 import Spinner from '@/components/ui/Spinner'
 
@@ -217,16 +218,11 @@ export default function PhotoTool() {
                 </div>
               </div>
 
-              <Card title="Print Sheet Preview">
-                <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 p-3 bg-gray-50 rounded-lg">
-                  {Array.from({ length: 4 }).map((_, i) => (
-                    <div key={i} className="rounded overflow-hidden border border-gray-200 bg-white" style={{ aspectRatio: '3 / 4' }}>
-                      <img src={processedUrl} alt={`Copy ${i + 1}`} className="w-full h-full object-contain" style={{ filter: postFilter }} />
-                    </div>
-                  ))}
-                </div>
-                <p className="text-[11px] text-gray-300 mt-2 text-center">Print at your nearest photo center</p>
-              </Card>
+              {selectedSpec && (
+                <Card title="Print Sheet">
+                  <PrintSheet imageSrc={processedUrl} spec={selectedSpec} filter={postFilter} />
+                </Card>
+              )}
             </div>
           )}
 
