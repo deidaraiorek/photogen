@@ -76,12 +76,24 @@ export default function PrintSheet({ imageSrc, spec, filter }: PrintSheetProps) 
               }}
             >
               {Array.from({ length: layout.count }).map((_, i) => (
-                <div key={i} className="border border-dashed border-gray-300 overflow-hidden">
+                <div key={i} className="relative border border-dashed border-gray-300 overflow-hidden">
                   <img
                     src={imageSrc}
                     alt={`Copy ${i + 1}`}
-                    className="w-full h-full object-cover"
-                    style={{ filter }}
+                    className="object-cover"
+                    style={
+                      layout.rotated
+                        ? {
+                            filter,
+                            position: 'absolute',
+                            top: '50%',
+                            left: '50%',
+                            width: `${(layout.photoHeightMm / layout.photoWidthMm) * 100}%`,
+                            height: `${(layout.photoWidthMm / layout.photoHeightMm) * 100}%`,
+                            transform: 'translate(-50%, -50%) rotate(90deg)',
+                          }
+                        : { filter, width: '100%', height: '100%' }
+                    }
                   />
                 </div>
               ))}
