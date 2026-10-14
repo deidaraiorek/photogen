@@ -138,7 +138,7 @@ Open http://localhost:3000
 | US Visa | 🇺🇸 United States | 2x2" (600x600px) | 50-69% | White |
 | EU Passport | 🇪🇺 EU / Schengen | 35x45mm (413x531px) | 70-80% | Light Gray |
 | UK Passport | 🇬🇧 United Kingdom | 35x45mm (413x531px) | 70-80% | Light Gray |
-| Canada Passport | 🇨🇦 Canada | 35x45mm (420x540px) | 71% | White |
+| Canada Passport (online renewal) | 🇨🇦 Canada | 3:2 (1200x1800px) | 45-50% | White / light |
 | Australia Passport | 🇦🇺 Australia | 35x45mm (413x531px) | 75% | White |
 | India Passport | 🇮🇳 India | 35x45mm (413x531px) | 75% | White |
 | China Visa | 🇨🇳 China | 33x48mm (390x567px) | 70% | White |

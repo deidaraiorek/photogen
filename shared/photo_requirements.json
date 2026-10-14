@@ -98,11 +98,12 @@
       ]
     },
     "CANADA_PASSPORT": {
-      "name": "Canadian Passport",
+      "name": "Canadian Passport (Online Renewal)",
       "country": "Canada",
+      "digital_only": true,
       "dimensions": {
-        "width_px": 591,
-        "height_px": 827,
+        "width_px": 1200,
+        "height_px": 1800,
         "width_mm": 50,
         "height_mm": 70,
         "dpi": 300
@@ -112,22 +113,24 @@
         "name": "White"
       },
       "face_requirements": {
-        "head_height_percent": 0.50,
+        "head_height_percent": 0.475,
         "eye_level_percent": 0.55,
         "min_head_height_mm": 31,
         "max_head_height_mm": 36
       },
       "file_requirements": {
-        "max_size_kb": 240,
+        "min_size_kb": 200,
+        "max_size_kb": 5120,
         "formats": ["JPEG"],
         "color_mode": "RGB"
       },
       "rules": [
         "Neutral expression",
         "Eyes visible and open",
-        "White background",
-        "Head and shoulders visible",
-        "Face must fill 31-36mm of 70mm height"
+        "Plain white or light-coloured background",
+        "3:2 portrait aspect ratio",
+        "Face must fill 45-50% of the image height",
+        "Use the original, unaltered file from a commercial photographer"
       ]
     },
     "AUSTRALIA_PASSPORT": {

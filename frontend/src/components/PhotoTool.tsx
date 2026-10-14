@@ -218,7 +218,7 @@ export default function PhotoTool() {
                 </div>
               </div>
 
-              {selectedSpec && (
+              {selectedSpec && !selectedSpec.digital_only && (
                 <Card title="Print Sheet">
                   <PrintSheet imageSrc={processedUrl} spec={selectedSpec} filter={postFilter} />
                 </Card>

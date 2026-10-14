@@ -8,7 +8,7 @@ from app.core.background_removal import remove_background
 from app.core.cropping import auto_crop_passport, center_crop
 from app.core.face_detection import get_primary_face
 from app.core.image_enhancement import auto_enhance, enhance_image
-from app.core.validator import compress_to_limit, validate_compliance
+from app.core.validator import compress_to_limits, validate_compliance
 from app.data.photo_specs import get_spec
 
 
@@ -68,8 +68,12 @@ def process_photo(
     else:
         image = center_crop(image, target_w, target_h, bg_color=bg_color)
 
-    compliance = validate_compliance(image, spec)
-    image_bytes_out, _ = compress_to_limit(image, file_req.get("max_size_kb", 500))
+    image_bytes_out, _ = compress_to_limits(
+        image,
+        max_size_kb=file_req.get("max_size_kb", 500),
+        min_size_kb=file_req.get("min_size_kb"),
+    )
+    compliance = validate_compliance(image, spec, file_size_bytes=len(image_bytes_out))
 
     encoded = base64.b64encode(image_bytes_out).decode("utf-8")
     elapsed_ms = round((time.time() - start) * 1000, 1)

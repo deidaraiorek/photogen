@@ -4,7 +4,7 @@ const COUNTRIES = [
   { name: 'United States', flag: '🇺🇸', size: '2×2 inches (51×51 mm)' },
   { name: 'European Union', flag: '🇪🇺', size: '35×45 mm' },
   { name: 'United Kingdom', flag: '🇬🇧', size: '35×45 mm' },
-  { name: 'Canada', flag: '🇨🇦', size: '50×70 mm' },
+  { name: 'Canada', flag: '🇨🇦', size: '1200×1800 px (online renewal)' },
   { name: 'Australia', flag: '🇦🇺', size: '35×45 mm' },
   { name: 'India', flag: '🇮🇳', size: '35×45 mm' },
   { name: 'China', flag: '🇨🇳', size: '33×48 mm' },

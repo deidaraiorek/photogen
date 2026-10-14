@@ -15,7 +15,7 @@ export default function RequirementsInfo({ spec }: RequirementsInfoProps) {
         <div className="space-y-0.5">
           <p className="text-gray-400 text-[10px] font-medium uppercase tracking-wider">Dimensions</p>
           <p className="text-gray-700 font-medium">
-            {dimensions.width_mm} x {dimensions.height_mm} mm
+            {spec.digital_only ? '3:2 portrait' : `${dimensions.width_mm} x ${dimensions.height_mm} mm`}
           </p>
           <p className="text-gray-400">{dimensions.width_px} x {dimensions.height_px} px</p>
         </div>
@@ -28,7 +28,11 @@ export default function RequirementsInfo({ spec }: RequirementsInfoProps) {
             />
             <span className="text-gray-700 font-medium">{background.name}</span>
           </div>
-          <p className="text-gray-400">Max {file_requirements.max_size_kb} KB</p>
+          <p className="text-gray-400">
+            {file_requirements.min_size_kb
+              ? `${file_requirements.min_size_kb} KB–${file_requirements.max_size_kb / 1024} MB`
+              : `Max ${file_requirements.max_size_kb} KB`}
+          </p>
         </div>
       </div>
 

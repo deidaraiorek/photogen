@@ -1,7 +1,7 @@
 'use client'
 
 import type { ProcessMetadata } from '@/lib/types'
-import { base64ToObjectUrl, formatFileSize } from '@/lib/utils'
+import { base64ToObjectUrl, downloadBase64, formatFileSize } from '@/lib/utils'
 import Button from './ui/Button'
 
 interface DownloadButtonProps {
@@ -14,6 +14,12 @@ interface DownloadButtonProps {
 export default function DownloadButton({ base64, metadata, processingTimeMs, filter }: DownloadButtonProps) {
   function handleDownload() {
     const filename = `${metadata.document_type.toLowerCase().replace('_', '-')}-photo.jpg`
+    const neutralFilter = 'brightness(100%) contrast(100%) saturate(100%)'
+    if (!filter || filter === neutralFilter) {
+      downloadBase64(base64, filename)
+      return
+    }
+
     const img = new Image()
     img.onload = () => {
       const canvas = document.createElement('canvas')
