@@ -71,7 +71,3 @@ def compress_to_limits(
     if min_size_kb is not None:
         image_bytes = _pad_jpeg_to_minimum(image_bytes, math.ceil(min_size_kb * 1024))
     return image_bytes, 35
-
-
-def compress_to_limit(image: Image.Image, max_size_kb: int) -> tuple[bytes, int]:
-    return compress_to_limits(image, max_size_kb)
