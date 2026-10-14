@@ -2,7 +2,7 @@ export const COUNTRY_LABELS: Record<string, string> = {
   US_PASSPORT_VISA: '🇺🇸 US Passport / Visa',
   EU_PASSPORT: '🇪🇺 EU / Schengen Passport',
   UK_PASSPORT: '🇬🇧 UK Passport',
-  CANADA_PASSPORT: '🇨🇦 Canadian Passport',
+  CANADA_PASSPORT: '🇨🇦 Canadian Passport (Online)',
   AUSTRALIA_PASSPORT: '🇦🇺 Australian Passport',
   INDIA_PASSPORT: '🇮🇳 Indian Passport',
   CHINA_VISA: '🇨🇳 Chinese Visa',

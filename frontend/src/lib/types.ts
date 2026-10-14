@@ -19,6 +19,7 @@ export interface FaceRequirements {
 }
 
 export interface FileRequirements {
+  min_size_kb?: number
   max_size_kb: number
   formats: string[]
   color_mode: string
@@ -27,6 +28,7 @@ export interface FileRequirements {
 export interface PhotoSpec {
   name: string
   country: string
+  digital_only?: boolean
   dimensions: PhotoDimensions
   background: PhotoBackground
   face_requirements: FaceRequirements

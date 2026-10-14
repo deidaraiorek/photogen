@@ -91,6 +91,7 @@ export default function PhotoTool() {
   const cropSourceUrl = bgRemovedUrl || previewUrl
   const postFilter = `brightness(${postBrightness}%) contrast(${postContrast}%) saturate(${postSaturation}%)`
   const selectedSpec = specs[documentType]
+  const processedSpec = result ? specs[result.metadata.document_type] : undefined
   const hasResult = status === 'done' && result
 
   if (specsLoading) {
@@ -213,14 +214,20 @@ export default function PhotoTool() {
                   </Card>
 
                   <Card title="Download">
-                    <DownloadButton base64={result.processed_image} metadata={result.metadata} filter={postFilter} />
+                    <DownloadButton
+                      base64={result.processed_image}
+                      metadata={result.metadata}
+                      filter={postFilter}
+                      minSizeKb={processedSpec?.file_requirements.min_size_kb}
+                      maxSizeKb={processedSpec?.file_requirements.max_size_kb}
+                    />
                   </Card>
                 </div>
               </div>
 
-              {selectedSpec && (
+              {processedSpec && !processedSpec.digital_only && (
                 <Card title="Print Sheet">
-                  <PrintSheet imageSrc={processedUrl} spec={selectedSpec} filter={postFilter} />
+                  <PrintSheet imageSrc={processedUrl} spec={processedSpec} filter={postFilter} />
                 </Card>
               )}
             </div>
@@ -236,11 +243,11 @@ export default function PhotoTool() {
         </div>
       </div>
 
-      {showManualCrop && cropSourceUrl && selectedSpec && (
+      {showManualCrop && cropSourceUrl && processedSpec && (
         <ManualCropModal
           imageSrc={cropSourceUrl}
-          spec={selectedSpec}
-          bgColor={options.background_color || selectedSpec.background.color}
+          spec={processedSpec}
+          bgColor={options.background_color || processedSpec.background.color}
           onApply={handleManualCropApply}
           onClose={() => setShowManualCrop(false)}
         />
