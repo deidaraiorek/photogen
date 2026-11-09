@@ -25,6 +25,7 @@ export interface PrintSheetLayout {
   offsetYMm: number
   marginMm: number
   gutterMm: number
+  rotated: boolean
 }
 
 function maxFit(paperLengthMm: number, photoLengthMm: number): number {
@@ -65,6 +66,7 @@ export function computePrintSheetLayout(
     offsetYMm: (paper.height_mm - gridHeightMm) / 2,
     marginMm: MARGIN_MM,
     gutterMm: GUTTER_MM,
+    rotated,
   }
 }
 
@@ -103,7 +105,15 @@ export async function renderPrintSheet(
     for (let col = 0; col < layout.cols; col++) {
       const x = offsetXpx + col * (photoWpx + gutterPx)
       const y = offsetYpx + row * (photoHpx + gutterPx)
-      ctx.drawImage(img, x, y, photoWpx, photoHpx)
+      if (layout.rotated) {
+        ctx.save()
+        ctx.translate(x + photoWpx / 2, y + photoHpx / 2)
+        ctx.rotate(Math.PI / 2)
+        ctx.drawImage(img, -photoHpx / 2, -photoWpx / 2, photoHpx, photoWpx)
+        ctx.restore()
+      } else {
+        ctx.drawImage(img, x, y, photoWpx, photoHpx)
+      }
       ctx.strokeRect(x, y, photoWpx, photoHpx)
     }
   }
